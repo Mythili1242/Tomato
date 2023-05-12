@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .confettie-wrap {
+    background-color: darkslateblue;
+    padding: 200px;
+  }
+  
+  .confettie-wrap h3 {
+    margin: 0;
+    color: white;
+    letter-spacing: 2px;
+  }
+  
