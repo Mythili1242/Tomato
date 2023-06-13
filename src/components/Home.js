@@ -16,15 +16,50 @@ const Home = () => {
       const logo1="https://mir-s3-cdn-cf.behance.net/projects/404/2971a3169377049.Y3JvcCwxMDgwLDg0NCwwLDExNw.png"
 
   // const logo="zomato/src/components/Zomato_logo.jpg"
- const [food,setFood]=useState()
-const navigate=useNavigate();
+ const [food,setFood]=useState();
+ const [auth,setAuth]=useState(false);
+localStorage.setItem("auth",auth)
 
+const navigate=useNavigate();
+const tok2=localStorage.getItem("token")
  
  useEffect(()=>{
+  
 fetch("http://localhost:9000/rest")
 .then(res=>res.json())
-.then(data=>setFood(data))
+.then(data=>setFood(data))  
  },[])
+
+
+
+ useEffect(()=>{
+ 
+if(tok2){
+  var parsed=JSON.parse(tok2);
+  let tok1=parsed.accessToken
+
+
+
+
+async function fetchprotected(){
+  const result=await(await fetch("http://localhost:9000/rest/protected",{
+    method:"POST",
+    headers:{
+      'Content-Type':'application/json',
+      authorization:`Bearer ${tok1}`,
+    }
+  })).json();
+  console.log(result);
+if(result.data==="authorized"){
+setAuth(!auth);
+console.log(auth)
+}
+
+}
+fetchprotected();
+}
+ },[])
+
 
  const handleChange=(val)=>{
   console.log(val);
@@ -41,16 +76,19 @@ if(!val){
  }
 
  const handlelogout=async()=>{
+
+  
 const result=await(await fetch("http://localhost:9000/rest/logout",{
   method:"POST",
   credentials:"include"
 })).json()
-
 console.log(result);
-// .then(res=>console.log(res.json()))
-// .then(a=>console.log(a))
-localStorage.setItem("token","")
+localStorage.setItem("token","");
+
+
+
  }
+
 
 
  const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +111,7 @@ useEffect(()=>{
 
  
   
-console.log(currentCards)
+// console.log(currentCards)
   function handlePrevPage() {
     setCurrentPage(currentPage - 1);
   }
@@ -93,14 +131,18 @@ console.log(currentCards)
   <img src={require("./tomato.png")} alt="no img" style={{width:"190px",height:"160px",marginTop:"-0px"}} onClick={()=>{navigate("/")}}></img>
   {/* <p>Search filter App</p> */}
   {/* {localStorage.getItem("token")!={}?<h4>Welcome {((JSON.parse(localStorage.getItem("token"))).email)}  */}
-  {localStorage.getItem("token")?<h4>Welcome {((JSON.parse(localStorage.getItem("token"))).email)} {console.log((JSON.parse(localStorage.getItem("token"))).email)} </h4>:
+  {/* {localStorage.getItem("token")?<h4>Welcome {((JSON.parse(localStorage.getItem("token"))).email)} {console.log((JSON.parse(localStorage.getItem("token"))).email)} </h4>: */}
+  {localStorage.getItem("token")?<h4>Welcome {((JSON.parse(localStorage.getItem("token"))).email)}  </h4>:
+
   <ul className="list">
     <li><a href="/login">Login</a></li>
     <li><a href="/signup">SignUp</a></li>
   </ul>
 }
 <ul className="list"> 
-<li><a href="/cart1"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+<li><a href="/cart1"><i className="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+{auth&&<li><a href="/admin">admin</a></li>}
+
  {localStorage.getItem("token")&& <li><a href="/" onClick={handlelogout}>Logout</a></li>}  
     
     </ul>

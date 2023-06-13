@@ -79,6 +79,7 @@ navigate("/cart",{state:{val:val,name:name,symbol:symbol,count:count}})
 
 <ul className="list"> 
 <li><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+{localStorage.getItem("auth")==true&&<li><a href="/admin">admin</a></li>}
 {localStorage.getItem("token")&& <li><a href="/" onClick={handlelogout}>Logout</a></li>} 
     {/* <li><a href="/" onClick={handlelogout} >Logout</a></li> */}
     

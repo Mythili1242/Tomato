@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
 
 function Cards({food}) {
-  console.log(food);
+  // console.log(food);
   const navigate=useNavigate();
 
   function showCard(item){
@@ -11,7 +11,7 @@ function Cards({food}) {
   }
   
   const a=[food];
-  console.log(a)
+  // console.log(a)
   return (
    <>
   
@@ -19,7 +19,7 @@ function Cards({food}) {
     return(
       <>
      
-            <Card style={{ width: '22rem', border:"none",marginBottom:"40px",backgroundColor:"#F0F8FF" }} onClick={()=>showCard(item)}>
+            <Card style={{ width: '22rem', border:"none",marginBottom:"40px",backgroundColor:"#F0F8FF" }} onClick={()=>showCard(item)} >
       <Card.Img variant="top" src={item.imgdata} className='cardimg' />
       <Card.Body>
         {/* <Card.Title>Card Title</Card.Title> */}

@@ -13,7 +13,11 @@ import { useContext } from 'react';
 import  {userContext}  from "../App";
 import { useEffect } from 'react';
 import Confetti from 'react-confetti';
-
+import phone from "./phone.png";
+import upi from "./upi.png";
+import cod from "./cod.png";
+import net from "./netbank.png";
+import gpay from "./gpay.png";
 
 function Media(props) {
 console.log(props);
@@ -52,6 +56,25 @@ useEffect(() => {
   }
 }, [couponApplied]);
 
+
+function removeItem(cart,val,name){
+  console.log(cart,val,name)
+var i=cart.length;
+console.log(i);
+// console.log(cart[0].name)
+for(let j=0;j<i;j++){
+    
+  if(cart[j]&&cart[j].hasOwnProperty(val)&&cart[j].name===name)
+  {
+ var cart1=cart.splice(j,1);
+ cart=cart.slice();
+ console.log(cart)
+  }
+}
+setCartitems(cart)
+
+}
+
   return (
     <>
      {/* {couponApplied && <Confetti />} */}
@@ -78,8 +101,8 @@ useEffect(() => {
         {cartitems&&cartitems.map(item=>{
       return(
         <>
-        <Card.Title>{item.symbol}{item.name}</Card.Title>
-       
+        <Card.Title>{item.symbol}{item.name}<span onClick={()=>{removeItem(cartitems,"name",item.name) ;console.log(cartitems)}} style={{marginLeft:"190px",fontSize:"15px",color:"red"}}>Remove</span></Card.Title>
+      
         <Card.Text>
          cost:<span style={{marginLeft:"360px"}}>₹{item.val}</span>
         </Card.Text>
@@ -96,8 +119,8 @@ useEffect(() => {
     <Card style={{marginTop:"10px",}}>
      
      <Card.Body>
-       <Card.Text style={{borderBottom:"1px dashed grey",paddingBottom:"10px",cursor:"pointer"}} onClick={()=>{navigate("/")}}><i class="fa fa-plus-circle" aria-hidden="true"></i>Add more items<span style={{paddingLeft:"250px"}}><i class="fa fa-arrow-right" aria-hidden="true"></i></span></Card.Text>
-       <Card.Text onClick={handleShow} style={{cursor:"pointer"}}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Add Cooking instructions<span style={{paddingLeft:"180px"}}><i class="fa fa-arrow-right" aria-hidden="true"></i></span></Card.Text>
+       <Card.Text style={{borderBottom:"1px dashed grey",paddingBottom:"10px",cursor:"pointer"}} onClick={()=>{navigate("/")}}><i className="fa fa-plus-circle" aria-hidden="true"></i>Add more items<span style={{paddingLeft:"250px"}}><i class="fa fa-arrow-right" aria-hidden="true"></i></span></Card.Text>
+       <Card.Text onClick={handleShow} style={{cursor:"pointer"}}><i className="fa fa-pencil-square-o" aria-hidden="true"></i>Add Cooking instructions<span style={{paddingLeft:"180px"}}><i className="fa fa-arrow-right" aria-hidden="true"></i></span></Card.Text>
        <Modal
         show={show}
         onHide={handleClose}
@@ -250,7 +273,7 @@ useEffect(() => {
     </Box>
     </Popover.Body>
   </Popover>}>
-      <h5 style={{marginTop:"30px"}}>Your Details<i class="fa fa-arrow-right" aria-hidden="true"></i></h5>
+      <h5 style={{marginTop:"30px"}}>Your Details<i className="fa fa-arrow-right" aria-hidden="true"></i></h5>
   </OverlayTrigger>
 {submitted&& <Card style={{width:"400px",marginTop:"30px"}}>
   <Card.Header>Details</Card.Header>
@@ -269,19 +292,19 @@ useEffect(() => {
         <form>
 
         <input type="radio" name="pay" id="phnpe" value="phnpe"  /><npsp> </npsp>
-        <label for="phnpe">Phone pe</label><br></br>
+        <label for="phnpe"><span><img src={phone} style={{width:"20px",marginRight:"20px"}} /></span>Phone pe</label><br></br>
        
         <input type="radio" name="pay" id="googlepay" value="googlepay" /><npsp> </npsp>
-        <label for="googlepay"> Google pay</label><br></br>
+        <label for="googlepay"><span><img src={gpay} style={{width:"20px",marginRight:"20px"}} /></span> Google pay</label><br></br>
 
         <input type="radio" name="pay" id="upi" value="upi" /><npsp> </npsp>
-        <label for="upi">UPI</label><br></br>
+        <label for="upi"><span><img src={upi} style={{width:"30px",marginRight:"20px"}} /></span>UPI</label><br></br>
 
         <input type="radio" name="pay" id="net" value="net" /><npsp> </npsp>
-        <label for="net">Net Banking</label><br></br>
+        <label for="net"><span><img src={net} style={{width:"20px",marginRight:"20px"}} /></span>Net Banking</label><br></br>
 
         <input type="radio" name="pay" id="cod" value="cod" /><npsp> </npsp>
-        <label for="cod">Cash on delivery</label>
+        <label for="cod"><span><img src={cod} style={{width:"20px",marginRight:"20px"}} /></span>Cash on delivery</label>
 
        </form>
 </Card.Body>
@@ -355,7 +378,7 @@ console.log(b)
    </ul> */}
 
    <ul className="list"> 
-
+   {localStorage.getItem("auth")==true&&<li><a href="/admin">admin</a></li>}
 {localStorage.getItem("token")? <li><a href="/" onClick={handlelogout}>Logout</a></li>:<ul className="list">
     <li><a href="/login">Login</a></li>
     <li><a href="/signup">SignUp</a></li>
