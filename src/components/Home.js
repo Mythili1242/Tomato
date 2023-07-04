@@ -37,10 +37,6 @@ fetch("http://localhost:9000/rest")
 if(tok2){
   var parsed=JSON.parse(tok2);
   let tok1=parsed.accessToken
-
-
-
-
 async function fetchprotected(){
   const result=await(await fetch("http://localhost:9000/rest/protected",{
     method:"POST",

@@ -54,3 +54,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+{"_id":{"$oid":"646371adb544a3f7569c9ab9"},"rname":"Mehfil","imgdata":"https://media.istockphoto.com/id/1430624638/photo/crispy-baked-chicken-wings-in-a-plate-with-lemon-and-dipping-sauce-close-up-photo.jpg?s=2048x2048&w=is&k=20&c=b1nrWdppz82Rj-PA9JwC-9N4Nm6wmzTJNR7mvO5ZBI0=","address":"Biriyani,Fast foods,chai","delimg":"https://b.zmtcdn.com/data/o2_assets/0b07ef18234c6fdf9365ad1c274ae0631612687510.png?output-format=webp","somedata":"3003 + order placed from here recently","rating":"4.8","arrimg":"https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp","__v":{"$numberInt":"0"}}

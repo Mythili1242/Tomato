@@ -98,4 +98,5 @@ navigate("/admin1")
   )
 }
 
-export default Admin
+export default Admin;
+
