@@ -16,13 +16,13 @@ body{
     margin-top: 15px;
 } */
 
+
 .head .list{
     list-style-type: none;
     display: flex;
    
     font-size:larger;
-    font-weight: bold; 
-    
+    font-weight: bold;
 }
 
 .head ul li{
